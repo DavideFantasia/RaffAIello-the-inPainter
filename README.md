@@ -107,3 +107,6 @@ Il file JSON incluso utilizza una strategia a triplo controllo:
 * **LoRA Injection**: Il LoRA `RaffaelloStyle.safetensors` viene caricato con forza 0.6 per applicare lo stile specifico.
 
 ---
+
+## Esempi di Restauro
+![Comparazione fra patch originale e patch con alcune crepe riempite](docs/img/comparing.png)
