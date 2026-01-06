@@ -93,9 +93,9 @@ Sono stati usati i seguenti parametri:
 | learning rate | 1e-4 |
 
 ### 3. Inference (`Raffaello the Inpainter.json`)
-Il risultato finale è un workflow complesso per **ComfyUI** che orchestra diversi modelli per un restauro quanto più fedele.
+Si lavora per l'inpainting di una singola patch con un workflow complesso per **ComfyUI** che orchestra diversi modelli per un restauro quanto più fedele.
 
-#### 🧩 Analisi del Workflow ComfyUI
+#### 🔎​ Analisi del Workflow ComfyUI
 Il file JSON incluso utilizza una strategia a triplo controllo:
 
 * **Base Model**: Utilizza `dreamshaper_8Inpainting.safetensors`, un modello checkpoint specificamente finetunato per l'inpainting, garantendo una coerenza di base superiore a SD standard.
@@ -108,5 +108,9 @@ Il file JSON incluso utilizza una strategia a triplo controllo:
 
 ---
 
-## Esempi di Restauro
+## Restauro di una patch
 ![Comparazione fra patch originale e patch con alcune crepe riempite](docs/img/comparing.png)
+
+## 🧩​ Restauro dell'opera intera
+
+Per poter applicare il processo di inpainting all'intera opera è necessario dividerla in patch della dimensione adatta, segmentandola in base al contesto e crepe, andando poi ad applicare il processo di inpaiting alle singole patch e ricomponendo l'opera finita.
