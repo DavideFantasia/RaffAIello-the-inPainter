@@ -12,8 +12,11 @@ import random
 # ======================
 # CONFIG
 # ======================
-INPUT_DIR = "dataset_raw/images"
-OUTPUT_DIR = "dataset"
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+INPUT_DIR = os.path.join(CURRENT_DIR, "raw/images")
+OUTPUT_DIR = os.path.join(CURRENT_DIR, "img")
+MODEL_DIR = os.path.join(CURRENT_DIR, "../models")
+
 PATCH_SIZE = 512
 MAX_PATCHES_PER_IMAGE = 16
 
@@ -23,9 +26,9 @@ MIN_VARIANCE = 15         # filtro patch piatte
 # ======================
 # MODELLI
 # ======================
-yolo = YOLO("yolov8n-seg.pt") #modello per la segmentazione generale delle figure
+yolo = YOLO(f"{MODEL_DIR}/yolov8n-seg.pt") #modello per la segmentazione generale delle figure
 
-yolo_pose = YOLO("yolov8n-pose.pt") #modello per il rilevamento degli arti umani
+yolo_pose = YOLO(f"{MODEL_DIR}/yolov8n-pose.pt") #modello per il rilevamento degli arti umani
 
 face_app = FaceAnalysis(providers=["CPUExecutionProvider"])
 face_app.prepare(ctx_id=0)
