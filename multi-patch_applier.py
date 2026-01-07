@@ -158,7 +158,7 @@ def main():
                 img_data = get_image_content(item['filename'], item['subfolder'], item['type'])
                 
                 # Nome file output: inpainted_nomefileoriginale.png
-                out_name = f"inpainted_{filename}"
+                out_name = f"{filename}"
                 out_path = os.path.join(config.INPAINTED_DIR, out_name)
                 
                 with open(out_path, "wb") as f_out:

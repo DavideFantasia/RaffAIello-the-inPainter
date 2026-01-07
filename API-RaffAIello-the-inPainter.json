@@ -29,7 +29,7 @@
   },
   "3": {
     "inputs": {
-      "text": "High Renaissance oil painting, style of Raphael Sanzio and Perugino, two kneeling saints in prayer, (left figure: young man with long curly hair, red mantle, green hose, looking up), (right figure: bearded man, blue tunic, red hose, hands clasped), detailed drapery, heavy fabric folds, green rolling hills, brown rocky cliffs, earthy tones, bushes, vegetation, ruins behind the figures, rocky cliffs, trees, atmospheric perspective, sfumato, soft lighting, masterpiece, sharp focus, (intact:1.2), restored.",
+      "text": "raffaello style, High Renaissance oil painting, style of Raphael Sanzio and Perugino, Umbrian school, masterpiece, religious art, (restored:1.3), (intact:1.2), soft atmospheric lighting, sfumato, detailed brushwork, vibrant colors, sharp focus, high resolution, smooth texture,",
       "clip": [
         "2",
         1
@@ -49,24 +49,9 @@
       "title": "Load Image"
     }
   },
-  "5": {
-    "inputs": {
-      "low_threshold": 100,
-      "high_threshold": 200,
-      "resolution": 512,
-      "image": [
-        "35",
-        0
-      ]
-    },
-    "class_type": "CannyEdgePreprocessor",
-    "_meta": {
-      "title": "Canny Edge"
-    }
-  },
   "6": {
     "inputs": {
-      "control_net_name": "control_v11p_sd15_canny.pth"
+      "control_net_name": "control_v11f1e_sd15_tile.pth"
     },
     "class_type": "ControlNetLoader",
     "_meta": {
@@ -75,9 +60,9 @@
   },
   "7": {
     "inputs": {
-      "strength": 0.5,
+      "strength": 0.95,
       "start_percent": 0,
-      "end_percent": 0.35,
+      "end_percent": 0.85,
       "positive": [
         "3",
         0
@@ -91,7 +76,7 @@
         0
       ],
       "image": [
-        "5",
+        "38",
         0
       ]
     },
@@ -102,12 +87,12 @@
   },
   "8": {
     "inputs": {
-      "seed": 216686266173718,
+      "seed": 300596875058689,
       "steps": 20,
       "cfg": 8,
       "sampler_name": "euler",
       "scheduler": "simple",
-      "denoise": 0.8,
+      "denoise": 0.7,
       "model": [
         "34",
         0
@@ -163,7 +148,7 @@
   },
   "18": {
     "inputs": {
-      "text": "(damage:1.3),(scratches:1.3), (paint loss:1.3), (lacunae:1.3), (white spots:1.2), noise, grunge, distressed texture, flaking paint, canvas texture showing through, text, watermark, bad anatomy, deformed hands, extra fingers, cartoon, drawing, sketch, blur.",
+      "text": "(damage:1.4), (cracks:1.4), (scratches:1.3), (paint loss:1.4), (white spots:1.4), (lacunae:1.3), flaking paint, canvas texture showing through, noise, grunge, distressed texture, text, watermark, bad anatomy, deformed, grid, seams, tiling artifacts, blur, photograph, 3d render, sketch.",
       "clip": [
         "1",
         1
@@ -218,7 +203,7 @@
   },
   "34": {
     "inputs": {
-      "weight": 0.7,
+      "weight": 0.5,
       "start_at": 0,
       "end_at": 1,
       "weight_type": "style transfer",
@@ -275,6 +260,20 @@
     "class_type": "ImageCompositeMasked",
     "_meta": {
       "title": "ImageCompositeMasked"
+    }
+  },
+  "38": {
+    "inputs": {
+      "pyrUp_iters": 3,
+      "resolution": 512,
+      "image": [
+        "35",
+        0
+      ]
+    },
+    "class_type": "TilePreprocessor",
+    "_meta": {
+      "title": "Tile"
     }
   }
 }
