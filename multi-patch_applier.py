@@ -76,7 +76,8 @@ def main():
     ]
     
     print(f"Trovate {len(image_files)} immagini principali da processare.")
-
+    counter = 0
+    total = len(image_files)
     for filename in image_files:
         print(f"\n-------------------------------------------------------------")
         print(f">>> Inizio lavorazione: {filename}")
@@ -134,9 +135,9 @@ def main():
         # Aggiorna Prompt (Nodo 3)
         if prompt_text:
             if "text" in workflow[NODE_ID_POSITIVE_PROMPT]["inputs"]:
-                 workflow[NODE_ID_POSITIVE_PROMPT]["inputs"]["text"] = prompt_text
+                 workflow[NODE_ID_POSITIVE_PROMPT]["inputs"]["text"] += ", "+prompt_text
             else:
-                 workflow[NODE_ID_POSITIVE_PROMPT]["inputs"]["text_g"] = prompt_text
+                 workflow[NODE_ID_POSITIVE_PROMPT]["inputs"]["text_g"] += ", "+prompt_text
 
         # Random Seed (Nodo 8)
         if "seed" in workflow[NODE_ID_KSAMPLER]["inputs"]:
@@ -181,7 +182,8 @@ def main():
                 print(f"    >>> SUCCESSO: Immagine salvata in {out_path}")
         else:
             print("    [Errore] Output non trovato. Verifica che NODE_ID_SAVE_IMAGE sia corretto.")
-
+        counter += 1
+        print(f"    >>> Eseguiti {counter}/{total} immagini.")
     print("\n--- Batch completato ---")
 
 if __name__ == "__main__":
