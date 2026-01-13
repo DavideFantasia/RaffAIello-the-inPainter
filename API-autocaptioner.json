@@ -1,0 +1,64 @@
+{
+  "2": {
+    "inputs": {
+      "text_input": "",
+      "task": "more_detailed_caption",
+      "fill_mask": true,
+      "keep_model_loaded": false,
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": true,
+      "output_mask_select": "",
+      "seed": 985335027961574,
+      "image": [
+        "3",
+        0
+      ],
+      "florence2_model": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "Florence2Run",
+    "_meta": {
+      "title": "Florence2Run"
+    }
+  },
+  "3": {
+    "inputs": {
+      "image": "tile_y00512_x00269 (1).png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "8": {
+    "inputs": {
+      "root_dir": "output",
+      "file": "caption.txt",
+      "append": "overwrite",
+      "insert": true,
+      "text": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "SaveText|pysssss",
+    "_meta": {
+      "title": "Save Text 🐍"
+    }
+  },
+  "10": {
+    "inputs": {
+      "model": "Florence-2-base",
+      "precision": "fp16",
+      "attention": "sdpa",
+      "convert_to_safetensors": false
+    },
+    "class_type": "Florence2ModelLoader",
+    "_meta": {
+      "title": "Florence2ModelLoader"
+    }
+  }
+}

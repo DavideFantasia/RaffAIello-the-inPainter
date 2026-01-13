@@ -10,8 +10,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STENDARDO_PATH = os.path.join(BASE_DIR,"stendardo")
 
 # File di input originali (Giganti)
-SRC_IMAGE_PATH = os.path.join(STENDARDO_PATH, "img/Trinita_25perc.png")
-SRC_MASK_PATH = os.path.join(STENDARDO_PATH, "mask/Trinita_25perc.png")
+SRC_IMAGE_PATH = os.path.join(STENDARDO_PATH, "img/Trinita_5perc-coarse_fix.png")
+SRC_MASK_PATH = os.path.join(STENDARDO_PATH, "mask/Trinita_5perc.png")
 FULL_OUTPUT_PATH = os.path.join(STENDARDO_PATH, "Stendardo_Restaurato.png")
 
 # Cartelle di lavoro
@@ -22,6 +22,7 @@ INPAINTED_DIR = os.path.join(STENDARDO_PATH, "patch_dst")
 
 # File del Workflow API
 WORKFLOW_FILE = os.path.join(BASE_DIR, "API-RaffAIello-the-inPainter.json")
+AUTOCAPTIONER_WORKFLOW_FILE = os.path.join(BASE_DIR, "API-autocaptioner.json")
 
 # ==============================================================================
 # IMPOSTAZIONI TAGLIO (SLICING)
@@ -38,16 +39,14 @@ COMFY_URL = "http://127.0.0.1:8000"
 # ==============================================================================
 # ID DEI NODI (Workflow API)
 # ==============================================================================
-NODE_ID_LOAD_IMAGE = "4"          # Nodo che carica l'immagine principale
-NODE_ID_LOAD_MASK = "9"           # Nodo LoadImageMask
-NODE_ID_POSITIVE_PROMPT = "3"     # Nodo CLIP Text Encode
+NODE_ID_LOAD_IMAGE = "52:4"          # Nodo che carica l'immagine principale
+NODE_ID_LOAD_MASK = "52:9"           # Nodo LoadImageMask
+NODE_ID_POSITIVE_PROMPT = "44"     # Nodo CLIP Text Encode
 NODE_ID_KSAMPLER = "8"            # KSampler (per il seed)
-NODE_ID_SAVE_IMAGE = "19"         # Nodo Save Image
+NODE_ID_SAVE_IMAGE = "79"         # Nodo Save Image
 
 # ==============================================================================
 # PROMPT SETTINGS
 # ==============================================================================
 # Per lo script di pulizia prompt
 TILE_PREFIX = "tile_"
-BAD_TAGS = ["cracks", "damage", "paint loss", "scratches", "texture", "grunge", "ruins", "spots"]
-PROMPT_PREFIX = "Raffaello style, restored, high quality, "

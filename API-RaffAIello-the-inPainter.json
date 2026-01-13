@@ -29,7 +29,10 @@
   },
   "3": {
     "inputs": {
-      "text": "raffaello style, High Renaissance oil painting, style of Raphael Sanzio and Perugino, Umbrian school, masterpiece, religious art, (restored:1.3), (intact:1.2), soft atmospheric lighting, sfumato, detailed brushwork, vibrant colors, sharp focus, high resolution, smooth texture,",
+      "text": [
+        "44",
+        0
+      ],
       "clip": [
         "2",
         1
@@ -40,65 +43,20 @@
       "title": "CLIP Text Encode (Prompt)"
     }
   },
-  "4": {
-    "inputs": {
-      "image": "stendardo inferiore.png"
-    },
-    "class_type": "LoadImage",
-    "_meta": {
-      "title": "Load Image"
-    }
-  },
-  "6": {
-    "inputs": {
-      "control_net_name": "control_v11f1e_sd15_tile.pth"
-    },
-    "class_type": "ControlNetLoader",
-    "_meta": {
-      "title": "Load ControlNet Model"
-    }
-  },
-  "7": {
-    "inputs": {
-      "strength": 0.95,
-      "start_percent": 0,
-      "end_percent": 0.85,
-      "positive": [
-        "3",
-        0
-      ],
-      "negative": [
-        "18",
-        0
-      ],
-      "control_net": [
-        "6",
-        0
-      ],
-      "image": [
-        "38",
-        0
-      ]
-    },
-    "class_type": "ControlNetApplyAdvanced",
-    "_meta": {
-      "title": "Apply ControlNet"
-    }
-  },
   "8": {
     "inputs": {
-      "seed": 300596875058689,
-      "steps": 20,
-      "cfg": 8,
-      "sampler_name": "euler",
-      "scheduler": "simple",
+      "seed": 368310091452150,
+      "steps": 30,
+      "cfg": 7,
+      "sampler_name": "dpmpp_2m_sde_gpu",
+      "scheduler": "karras",
       "denoise": 0.7,
       "model": [
-        "34",
+        "65",
         0
       ],
       "positive": [
-        "7",
+        "59:58",
         0
       ],
       "negative": [
@@ -115,21 +73,11 @@
       "title": "KSampler"
     }
   },
-  "9": {
-    "inputs": {
-      "image": "maschera stendardo inferiore.png",
-      "channel": "red"
-    },
-    "class_type": "LoadImageMask",
-    "_meta": {
-      "title": "Load Image (as Mask)"
-    }
-  },
   "12": {
     "inputs": {
       "grow_mask_by": 6,
       "pixels": [
-        "4",
+        "52:4",
         0
       ],
       "vae": [
@@ -137,7 +85,7 @@
         2
       ],
       "mask": [
-        "9",
+        "52:9",
         0
       ]
     },
@@ -148,7 +96,7 @@
   },
   "18": {
     "inputs": {
-      "text": "(damage:1.4), (cracks:1.4), (scratches:1.3), (paint loss:1.4), (white spots:1.4), (lacunae:1.3), flaking paint, canvas texture showing through, noise, grunge, distressed texture, text, watermark, bad anatomy, deformed, grid, seams, tiling artifacts, blur, photograph, 3d render, sketch.",
+      "text": "(damage:1.4), (cracks:1.4), (scratches:1.3), (paint loss:1.4), (white spots:1.4), (lacunae:1.3), flaking paint, canvas texture showing through, noise, grunge, distressed texture, text, watermark, bad anatomy, deformed, grid, seams, tiling artifacts, blur, photograph, 3d render, sketch, vegetation, leaves, plants, eyes, face, intricate details, complex pattern.",
       "clip": [
         "1",
         1
@@ -159,23 +107,10 @@
       "title": "CLIP Text Encode (Prompt)"
     }
   },
-  "19": {
-    "inputs": {
-      "filename_prefix": "test_stendardo",
-      "images": [
-        "36",
-        0
-      ]
-    },
-    "class_type": "SaveImage",
-    "_meta": {
-      "title": "Save Image"
-    }
-  },
   "20": {
     "inputs": {
       "samples": [
-        "8",
+        "66",
         0
       ],
       "vae": [
@@ -203,7 +138,7 @@
   },
   "34": {
     "inputs": {
-      "weight": 0.5,
+      "weight": 0.6,
       "start_at": 0,
       "end_at": 1,
       "weight_type": "style transfer",
@@ -216,7 +151,7 @@
         1
       ],
       "image": [
-        "4",
+        "52:4",
         0
       ]
     },
@@ -230,7 +165,7 @@
       "blur_radius": 1,
       "sigma": 1,
       "image": [
-        "4",
+        "52:4",
         0
       ]
     },
@@ -239,30 +174,105 @@
       "title": "ImageBlur"
     }
   },
-  "36": {
+  "44": {
     "inputs": {
-      "x": 0,
-      "y": 0,
-      "resize_source": false,
-      "destination": [
-        "4",
-        0
-      ],
-      "source": [
-        "20",
-        0
-      ],
-      "mask": [
-        "9",
+      "string_a": "raffaello style, high renaissance oil painting by Raphael and Perugino, oil on wood texture, sacred art, vivid colors, chiaroscuro, volumetric lighting, seamless restoration, color infill",
+      "string_b": " focus of a male saint with long mossy black hairs and gray-blue coat and red trauser, forest and mountains in the background, a city with a castle in the forest behind, sky without clouds, outside",
+      "delimiter": ","
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "Concatenate"
+    }
+  },
+  "65": {
+    "inputs": {
+      "b1": 1.2,
+      "b2": 1.4,
+      "s1": 0.9,
+      "s2": 0.2,
+      "model": [
+        "34",
         0
       ]
     },
-    "class_type": "ImageCompositeMasked",
+    "class_type": "FreeU_V2",
     "_meta": {
-      "title": "ImageCompositeMasked"
+      "title": "FreeU_V2"
     }
   },
-  "38": {
+  "66": {
+    "inputs": {
+      "seed": 355075692509284,
+      "steps": 30,
+      "cfg": 7,
+      "sampler_name": "dpmpp_2m_sde_gpu",
+      "scheduler": "karras",
+      "denoise": 0.3,
+      "model": [
+        "65",
+        0
+      ],
+      "positive": [
+        "59:58",
+        0
+      ],
+      "negative": [
+        "18",
+        0
+      ],
+      "latent_image": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "79": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "78:36",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "52:9": {
+    "inputs": {
+      "image": "tile_y00512_x00269_mask.png",
+      "channel": "red"
+    },
+    "class_type": "LoadImageMask",
+    "_meta": {
+      "title": "Load Image (as Mask)"
+    }
+  },
+  "52:4": {
+    "inputs": {
+      "image": "tile_y00512_x00269 (1).png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "60:6": {
+    "inputs": {
+      "control_net_name": "control_v11f1e_sd15_tile.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "60:38": {
     "inputs": {
       "pyrUp_iters": 3,
       "resolution": 512,
@@ -274,6 +284,120 @@
     "class_type": "TilePreprocessor",
     "_meta": {
       "title": "Tile"
+    }
+  },
+  "60:7": {
+    "inputs": {
+      "strength": 0.95,
+      "start_percent": 0,
+      "end_percent": 0.85,
+      "positive": [
+        "3",
+        0
+      ],
+      "negative": [
+        "18",
+        0
+      ],
+      "control_net": [
+        "60:6",
+        0
+      ],
+      "image": [
+        "60:38",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "59:58": {
+    "inputs": {
+      "strength": 0.5,
+      "start_percent": 0,
+      "end_percent": 0.5,
+      "positive": [
+        "60:7",
+        0
+      ],
+      "negative": [
+        "18",
+        0
+      ],
+      "control_net": [
+        "59:56",
+        0
+      ],
+      "image": [
+        "59:60",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "59:60": {
+    "inputs": {
+      "safe": "enable",
+      "resolution": 512,
+      "image": [
+        "35",
+        0
+      ]
+    },
+    "class_type": "HEDPreprocessor",
+    "_meta": {
+      "title": "HED Soft-Edge Lines"
+    }
+  },
+  "59:56": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_softedge.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "78:64": {
+    "inputs": {
+      "expand": 6,
+      "tapered_corners": true,
+      "mask": [
+        "52:9",
+        0
+      ]
+    },
+    "class_type": "GrowMask",
+    "_meta": {
+      "title": "Grow Mask"
+    }
+  },
+  "78:36": {
+    "inputs": {
+      "x": 0,
+      "y": 0,
+      "resize_source": false,
+      "destination": [
+        "52:4",
+        0
+      ],
+      "source": [
+        "20",
+        0
+      ],
+      "mask": [
+        "78:64",
+        0
+      ]
+    },
+    "class_type": "ImageCompositeMasked",
+    "_meta": {
+      "title": "ImageCompositeMasked"
     }
   }
 }

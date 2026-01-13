@@ -116,19 +116,17 @@ def main():
             # il canale scelto è il red
             workflow[config.NODE_ID_LOAD_MASK]["inputs"]["image"] = comfy_mask_name
         
-        # Aggiorna Prompt (Nodo 3)
+        # Aggiorna Prompt (Nodo 44)
         if prompt_text:
             if "text" in workflow[config.NODE_ID_POSITIVE_PROMPT]["inputs"]:
-                 workflow[config.NODE_ID_POSITIVE_PROMPT]["inputs"]["text"] += ", "+prompt_text
-            else:
-                 workflow[config.NODE_ID_POSITIVE_PROMPT]["inputs"]["text_g"] += ", "+prompt_text
-
+                 workflow[config.NODE_ID_POSITIVE_PROMPT]["inputs"]["string_b"] = prompt_text
+        
         # Random Seed (Nodo 8)
         if "seed" in workflow[config.NODE_ID_KSAMPLER]["inputs"]:
             workflow[config.NODE_ID_KSAMPLER]["inputs"]["seed"] = random.randint(1, 10**14)
         elif "noise_seed" in workflow[config.NODE_ID_KSAMPLER]["inputs"]:
             workflow[config.NODE_ID_KSAMPLER]["inputs"]["noise_seed"] = random.randint(1, 10**14)
-
+        
         # -----------------------------------------------------------
         # ESECUZIONE
         # -----------------------------------------------------------
