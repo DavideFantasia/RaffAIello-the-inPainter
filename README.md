@@ -97,7 +97,7 @@ Una volta fatto setuppato la cartella di lavoro possiamo avviare lo slicer come:
 python slicer.py 
 ```
 Per segmentare in tiles di dimensione 512+64x512+64px l'immagine target, la dimensione core, il padding e l'eventuale overlapping sono modificabili sempre in `config.py`.
-**Nota Bene**: nel caso dello 'stendardo di santissima trinità' su cui il progetto si focalizza, sono presenti molti buchi particolarmente invadenti; è consigliato prima di applicare lo slicing, di 'tappare' anche grossolanamente i buchi, gli esperimenti svolti l'inpainter big-lama usata come pre-processing ha portato a risultati soddisfacenti.
+**Nota Bene**: nel caso dello 'stendardo di santissima trinità' su cui il progetto si focalizza, sono presenti molti buchi particolarmente invadenti; è consigliato prima di applicare lo slicing, di 'tappare' anche grossolanamente i buchi, gli esperimenti svolti l'inpainter big-lama usata come pre-processing ha portato a risultati soddisfacenti. Il workflow usato a quello scopo è presente nella cartella `workflows/coarse_fix.json` insieme a tutti gli altri workflow usati.
 
 ### Captioning (opzionale)
 Il captioning è una parte cruciale della pipeline, essendo che il numero di tiles può crescere molto rapidamente, si mette a disposizione un tool di autocaptioning, che aiuta particolarmente ma necessita di controlli su tiles difficili da descrivere. **Assicurandoci di avere ComfyUI avviato** e con l'indirizzo del server uguale all'indirizzo salvato in `config.py`, possiamo avviare l'autocaptioning:
