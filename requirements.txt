@@ -1,0 +1,10 @@
+insightface>=0.7.3                 # Per rilevamento volti ad alta precisione
+numpy>=2.4.1                       # Calcoli matriciali
+opencv_contrib_python>=4.12.0.88   # Manipolazione immagini
+opencv_python>=4.12.0.88           # Manipolazione immagini
+opencv_python_headless>=4.12.0.88  # Manipolazione immagini
+Pillow>=12.1.0                     # Gestione formati immagini
+Requests>=2.32.5                   # Per scaricare da Wikimedia e interagire con ComfyUI
+tqdm>=4.67.1                       # Barra di avanzamento
+ultralytics>=8.3.241               # Gestione dei modelli YOLOv8 Seg & Posa
+urllib3>=2.6.3                     # Gestione per HTTP client
