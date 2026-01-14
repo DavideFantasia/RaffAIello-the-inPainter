@@ -15,7 +15,7 @@ Per evitare di fare lavoro in più rispetto al dovuto, vengono generate solo til
  ComfyUI con modello di captioning [microsoft/florence-2-base](https://huggingface.co/microsoft/Florence-2-base), lo script usa l'API del workflow per eseguire il captioning.
 
  ## 4. 🎨 Inpainting
- Nello script [multi-patch_applier.py](../multi-patch_applier.py) si passa tramite API al [workflow](workflow/Raffaello_the_Inpainter.json) ComfyUI una per una tutta le immagini con relative maschere e caption al modello di Inpainting.
+ Nello script [`multi-patch_applier.py`](../multi-patch_applier.py) si passa tramite API al [workflow](workflow/Raffaello_the_Inpainter.json) ComfyUI una per una tutta le immagini con relative maschere e caption al modello di Inpainting.
  
 #### 4.1 🔎​ Analisi del Workflow ComfyUI
 Il file JSON incluso utilizza una strategia a triplo controllo:
