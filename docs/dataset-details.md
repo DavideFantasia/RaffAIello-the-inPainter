@@ -1,9 +1,10 @@
+[🏠 Home](./README.md) | [🛠️ Pipeline](./docs/pipeline-details.md) | [🗂️ Dataset](./docs/dataset-details.md)
+
 ## 🏗️ Caratteristiche Principali
 
 * **Dataset Fetching Automatizzato**: Raccolta immagini ad alta risoluzione da Wikimedia Commons tramite query SPARQL, filtrate per medium (Olio su tela).
 * **Smart Patching & Anatomical Priority**: Creazione di dataset di training tramite segmentazione semantica, Face Analysis e Pose Detection per isolare con priorità volti, mani e piedi.
 * **Style Training**: Addestramento LoRA su base SD 1.5 (tramite Kohya_ss) specifico per catturare lo stile pittorico di Raffaello.
-* **Advanced ComfyUI Workflow**: Pipeline di inferenza ibrida che combina Inpainting tradizionale, ControlNet e IP-Adapter per risultati coerenti.
 
 ---
 
