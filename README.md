@@ -58,7 +58,7 @@ Installa i seguenti nodi personalizzati tramite ComfyUI Manager (*install missin
 | big-lama                   | `ComfyUI/models/inpaint`    | [🔗](https://github.com/advimman/lama/tree/main)                                                                                    |
 | ip-adapter-plus_sd15       | `ComfyUI/models/ipadapter`  | [🔗](https://huggingface.co/h94/IP-Adapter/blob/main/models/ip-adapter-plus_sd15.safetensors)                                       |
 | Florence-2-base            | `ComfyUI/models/LLM`        | [🔗](https://huggingface.co/microsoft/Florence-2-base-ft/tree/main)                                                                 |
-| RaffaelloStyle             | `ComfyUI/models/loras`      | [🔗]() o da trainare                                                                                                      |
+| RaffaelloStyle             | `ComfyUI/models/loras`      | [🔗](https://huggingface.co/DavideFantasia/RaffaelloStyle) o da trainare                                                            |
 
 </td>
 </tr>
