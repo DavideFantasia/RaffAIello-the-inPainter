@@ -1,3 +1,4 @@
+[🏠 Home](./README.md) | [🛠️ Pipeline](./docs/pipeline-details.md) | [🗂️ Dataset](./docs/dataset-details.md)
 # 🔧 Pipeline
  Il progetto si sviluppa in fasi separate, tutti i vari parametri del progetto sono visionabili e modificabili sul bisogno in [`config.py`](../config.py)
  ## 1. 🗂️ Creazione del Dataset
