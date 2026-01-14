@@ -9,7 +9,7 @@ from tqdm import tqdm
 # CONFIGURAZIONE
 # ==========================
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_DIR = os.path.join(CURRENT_DIR, "raw_test")
+OUTPUT_DIR = os.path.join(CURRENT_DIR, "raw")
 IMAGE_DIR = os.path.join(OUTPUT_DIR, "images")
 METADATA_FILE = os.path.join(OUTPUT_DIR, "metadata.json")
 USER_AGENT = "SD-Dataset-Bot/1.1 (research)"
@@ -245,4 +245,5 @@ def main():
     print(f"\nOperazione completata. Dataset salvato in: {OUTPUT_DIR}")
 
 if __name__ == "__main__":
+
     main()
