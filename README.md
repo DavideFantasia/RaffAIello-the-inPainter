@@ -1,4 +1,4 @@
-<img width="781" height="1381" alt="trinita_5perc" src="https://github.com/user-attachments/assets/d76ab96d-3789-41a9-b7bb-63ae42ea7d05" />[🏠 Home](./README.md) | [🛠️ Pipeline](./docs/pipeline-details.md) | [🗂️ Dataset](./docs/dataset-details.md)
+[🏠 Home](./README.md) | [🛠️ Pipeline](./docs/pipeline-details.md) | [🗂️ Dataset](./docs/dataset-details.md)
 
 # 🖌️ RaffAIello the Inpainter
 
