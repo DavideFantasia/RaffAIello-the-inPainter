@@ -1,4 +1,4 @@
-[🏠 Home](./README.md) | [🛠️ Pipeline](./docs/pipeline-details.md) | [🗂️ Dataset](./docs/dataset-details.md)
+[🏠 Home](../README.md) | [🛠️ Pipeline](./pipeline-details.md) | [🗂️ Dataset](./dataset-details.md)
 
 ## 🏗️ Caratteristiche Principali
 
