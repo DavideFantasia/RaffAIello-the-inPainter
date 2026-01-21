@@ -23,7 +23,7 @@ cd RaffAIello-the-inPainter
 ```
 E installare le dipendenze del progetto
 ```
-pip install -r requirements.txt
+pip install -U -r requirements.txt
 ```
 **Nota**: Il pacchetto insightface richiede Visual Studio C++ Build Tools installati su Windows per la compilazione corretta.
 ## 2. Configurazione ComfyUI
