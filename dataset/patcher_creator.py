@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 from insightface.app import FaceAnalysis
-from tqdm import tqdm
+from tqdm.auto import tqdm
 from PIL import Image
 import random
 
@@ -190,8 +190,8 @@ def compute_iou(boxA, boxB):
 # MAIN
 # ======================
 counter = 0
-os.system("cls")
-for fname in tqdm(os.listdir(INPUT_DIR),position=0, leave=False):
+
+for fname in tqdm(os.listdir(INPUT_DIR), desc=f"Processing Image", position=0, leave=False):
     if not fname.lower().endswith((".png",".jpg",".jpeg",".tif")):
         continue
 
@@ -204,7 +204,7 @@ for fname in tqdm(os.listdir(INPUT_DIR),position=0, leave=False):
         continue
 
     # -------- YOLO SEG --------
-    results = yolo(img, conf=0.25)[0]
+    results = yolo(img, conf=0.25, verbose=False)[0]
 
     subject_mask = np.zeros((h,w), dtype=np.uint8)
     bboxes = []
@@ -262,7 +262,7 @@ for fname in tqdm(os.listdir(INPUT_DIR),position=0, leave=False):
         
         if not is_duplicate:
             unique_bboxes.append(box)
-    print(f"Detected {len(bboxes) - len(unique_bboxes)} duplicates for {fname}.")  
+    #print(f"Detected {len(bboxes) - len(unique_bboxes)} duplicates for {fname}.")  
     bboxes = unique_bboxes
     # -------------------------------
     
@@ -277,6 +277,5 @@ for fname in tqdm(os.listdir(INPUT_DIR),position=0, leave=False):
 
         save_sample(counter, patch)
         counter += 1
-    os.system("cls")
 
 print(f"\nDataset creato: {counter} patch")
