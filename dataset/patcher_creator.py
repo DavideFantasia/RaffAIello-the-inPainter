@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 from insightface.app import FaceAnalysis
-from tqdm.auto import tqdm
+from tqdm import tqdm
 from PIL import Image
 import random
 
