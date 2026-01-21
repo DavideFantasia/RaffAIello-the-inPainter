@@ -17,11 +17,13 @@ INPUT_DIR = os.path.join(CURRENT_DIR, "raw/images")
 OUTPUT_DIR = os.path.join(CURRENT_DIR, "img")
 MODEL_DIR = os.path.join(CURRENT_DIR, "../models")
 
-PATCH_SIZE = 512
+PATCH_SIZE = 1024
 MAX_PATCHES_PER_IMAGE = 16
 
 BACKGROUND_RATIO = 0.35   # ~35% patch solo sfondo
 MIN_VARIANCE = 15         # filtro patch piatte
+
+IOU_THRESHOLD = 0.2      #soglia di sovrapposizione per il filtro duplicati
 
 # ======================
 # MODELLI
@@ -41,28 +43,76 @@ def square_crop(img, bbox, context=0.3):
     h, w = img.shape[:2]
     x1, y1, x2, y2 = bbox
     cx, cy = (x1+x2)//2, (y1+y2)//2
-    box = max(x2-x1, y2-y1)
-    size = int(box * (1 + context))
+    
+    # Calcoliamo la dimensione del lato del quadrato
+    box_dim = max(x2-x1, y2-y1)
+    size = int(box_dim * (1 + context))
     size = max(size, PATCH_SIZE)
 
-    x1 = max(0, cx - size//2)
-    y1 = max(0, cy - size//2)
-    x2 = min(w, x1 + size)
-    y2 = min(h, y1 + size)
+    # Safety check: se per assurdo il crop è più grande dell'immagine intera
+    if size > w: size = w
+    if size > h: size = h
+
+    # Calcolo coordinate iniziali centrate
+    x1 = cx - size // 2
+    y1 = cy - size // 2
+
+    # --- LOGICA DI SHIFTING ---
+    
+    # 1. Se esce a sinistra/alto, allineamento a 0
+    if x1 < 0: 
+        x1 = 0
+    if y1 < 0: 
+        y1 = 0
+        
+    # 2. Se esce a destra/basso, si sposta indietro
+    if x1 + size > w:
+        x1 = w - size
+    if y1 + size > h:
+        y1 = h - size
+        
+    #x2 e y2 basati su x1/y1 corretti e size fisso
+    x2 = x1 + size
+    y2 = y1 + size
+    
+    # --- FINE LOGICA ---
 
     crop = img[y1:y2, x1:x2]
-    crop = cv2.resize(crop, (PATCH_SIZE, PATCH_SIZE))
+    
+    if crop.shape[0] != crop.shape[1]:
+        # Fallback estremo: padding nero se proprio non si riesce a fare quadrato
+        top = 0
+        bottom = PATCH_SIZE - crop.shape[0]
+        left = 0
+        right = PATCH_SIZE - crop.shape[1]
+        crop = cv2.copyMakeBorder(crop, top, bottom, left, right, cv2.BORDER_CONSTANT, value=[0,0,0])
+    else:
+        interpolation = cv2.INTER_AREA if crop.shape[0] > PATCH_SIZE else cv2.INTER_CUBIC
+        crop = cv2.resize(crop, (PATCH_SIZE, PATCH_SIZE), interpolation=interpolation)
+        
     return crop
 
 def random_background_crop(img, forbidden_mask):
     h, w = img.shape[:2]
+    
+    # Tentiamo 20 volte di trovare uno spazio vuoto
     for _ in range(20):
-        x = random.randint(0, w - PATCH_SIZE)
-        y = random.randint(0, h - PATCH_SIZE)
-        mask_crop = forbidden_mask[y:y+PATCH_SIZE, x:x+PATCH_SIZE]
+        x1 = random.randint(0, w - PATCH_SIZE)
+        y1 = random.randint(0, h - PATCH_SIZE)
+        
+        x2 = x1 + PATCH_SIZE
+        y2 = y1 + PATCH_SIZE
+
+        # Controlliamo se in questa zona c'è il soggetto
+        mask_crop = forbidden_mask[y1:y2, x1:x2]
+        
+        # Se l'area occupata dal soggetto è inferiore al 5%
         if np.mean(mask_crop) < 0.05:
-            crop = img[y:y+PATCH_SIZE, x:x+PATCH_SIZE]
-            return crop
+            bbox = (x1, y1, x2, y2) # Definiamo la bbox
+            
+            return bbox # Ritorna le coordinate
+
+    # Se dopo 20 tentativi non trova uno spazio vuoto
     return None
 
 def good_patch(patch):
@@ -114,12 +164,34 @@ def get_extremities_bboxes(img):
                         extremity_boxes.append((x1, y1, x2, y2))
                         
     return extremity_boxes
+
+def compute_iou(boxA, boxB):
+    # Determina le coordinate del rettangolo di intersezione
+    xA = max(boxA[0], boxB[0])
+    yA = max(boxA[1], boxB[1])
+    xB = min(boxA[2], boxB[2])
+    yB = min(boxA[3], boxB[3])
+
+    # Calcola l'area dell'intersezione
+    interArea = max(0, xB - xA) * max(0, yB - yA)
+
+    # Calcola l'area dei due box
+    boxAArea = (boxA[2] - boxA[0]) * (boxA[3] - boxA[1])
+    boxBArea = (boxB[2] - boxB[0]) * (boxB[3] - boxB[1])
+
+    # Calcola intersezione fratto unione
+    # Se i box non si toccano, interArea è 0, quindi iou è 0
+    float_div = float(boxAArea + boxBArea - interArea)
+    if float_div == 0: return 0.0
+    
+    iou = interArea / float_div
+    return iou
 # ======================
 # MAIN
 # ======================
 counter = 0
-
-for fname in tqdm(os.listdir(INPUT_DIR)):
+os.system("cls")
+for fname in tqdm(os.listdir(INPUT_DIR),position=0, leave=False):
     if not fname.lower().endswith((".png",".jpg",".jpeg",".tif")):
         continue
 
@@ -169,11 +241,35 @@ for fname in tqdm(os.listdir(INPUT_DIR)):
         x1,y1,x2,y2 = map(int, f.bbox)
         if (x2-x1) > 128: #si da priorità ai volti ben definiti
             bboxes.insert(0, (x1,y1,x2,y2))  # priorità alta
+
+    # -------- PATCH BACKGROUND --------
+    n_bg = int(MAX_PATCHES_PER_IMAGE * BACKGROUND_RATIO) + 1
+    for _ in range(n_bg):
+        bg_bbox = random_background_crop(img, subject_mask)
+        bboxes.append(bg_bbox) if bg_bbox is not None else None
+
+    # --- FILTRO DUPLICATI (IoU) ---
+    unique_bboxes = []
+    # Soglia di sovrapposizione: significa che se due box 
+    # condividono più di un tot dell'area, uno viene scartato.
+
+    for box in bboxes:
+        is_duplicate = False
+        for kept_box in unique_bboxes:
+            if compute_iou(box, kept_box) > IOU_THRESHOLD:
+                is_duplicate = True
+                break
+        
+        if not is_duplicate:
+            unique_bboxes.append(box)
+    print(f"Detected {len(bboxes) - len(unique_bboxes)} duplicates for {fname}.")  
+    bboxes = unique_bboxes
+    # -------------------------------
     
     random.shuffle(bboxes)
     bboxes = bboxes[:MAX_PATCHES_PER_IMAGE]
 
-    # -------- PATCH SOGGETTO --------
+    # -------- CONTROLLO E SALVATAGGIO PATCH --------
     for bbox in bboxes:
         patch = square_crop(img, bbox)
         if not good_patch(patch):
@@ -181,15 +277,6 @@ for fname in tqdm(os.listdir(INPUT_DIR)):
 
         save_sample(counter, patch)
         counter += 1
-
-    # -------- PATCH BACKGROUND --------
-    n_bg = int(len(bboxes) * BACKGROUND_RATIO) + 1
-    for _ in range(n_bg):
-        bg = random_background_crop(img, subject_mask)
-        if bg is None or not good_patch(bg):
-            continue
-
-        save_sample(counter, bg)
-        counter += 1
+    os.system("cls")
 
 print(f"\nDataset creato: {counter} patch")
