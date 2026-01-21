@@ -1,10 +1,12 @@
-insightface>=0.7.3                 # Per rilevamento volti ad alta precisione
-numpy>=2.4.1                       # Calcoli matriciali
-opencv_contrib_python>=4.12.0.88   # Manipolazione immagini
-opencv_python>=4.12.0.88           # Manipolazione immagini
-opencv_python_headless>=4.12.0.88  # Manipolazione immagini
-Pillow>=12.1.0                     # Gestione formati immagini
-Requests>=2.32.5                   # Per scaricare da Wikimedia e interagire con ComfyUI
-tqdm>=4.67.1                       # Barra di avanzamento
-ultralytics>=8.3.241               # Gestione dei modelli YOLOv8 Seg & Posa
-urllib3>=2.6.3                     # Gestione per HTTP client
+# Core Logic & Computer Vision
+ultralytics>=8.0.0      # Per YOLOv8 Seg & Pose
+insightface>=0.7.3      # Per rilevamento volti ad alta precisione
+onnxruntime>=1.15.0     # Backend per InsightFace (Usa onnxruntime-gpu se hai CUDA)
+opencv-python>=4.8.0    # Manipolazione immagini
+pillow>=10.0.0          # Gestione formati immagini
+numpy>=1.24.0           # Calcoli matriciali
+
+# Data Fetching & Utilities
+requests>=2.31.0        # Per scaricare da Wikimedia
+tqdm>=4.65.0            # Barre di avanzamento
+
