@@ -1,11 +1,11 @@
-[🏠 Home](./README.md) | [🛠️ Pipeline](./docs/pipeline-details.md) | [🗂️ Dataset](./docs/dataset-details.md)
+[🏠 Home](./README.md) | [🛠️ Pipeline](./docs/pipeline-details.md) | [🗂️ Dataset](./docs/dataset-details.md) | [🖼️ Galleria](./docs/gallery.md)
 
 # 🖌️ RaffAIello the Inpainter
 
 **RaffAIello** è una pipeline end-to-end per l'inpainting artistico basata sullo stile di Raffaello Sanzio. Il progetto automatizza la creazione di dataset da Wikimedia, elabora patch intelligenti utilizzando computer vision (YOLO + FaceAnalysis) e addestra un modello LoRA per replicare lo stile pittorico rinascimentale per svolgere poi l'inpaiting con flussi di lavoro ComfyUI su quadri danneggiati di Raffaello.
 
 ![Comparazione fra patch originale e patch con alcune crepe riempite](docs/img/comparing.png "comparazione del risultato")
-vedi Galleria per più esempi.
+vedi la [Galleria](./docs/gallery.md) per più esempi e prompt usati.
 
 ## 🏗️ Caratteristiche Principali
 
