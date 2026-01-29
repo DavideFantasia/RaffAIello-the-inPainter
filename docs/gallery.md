@@ -3,7 +3,7 @@
 # Pipeline XL
 | Risultato | Dettagli di Generazione |
 | :--- | :--- |
-| <img src="img/comparing-1024.png" width="512"> | **Prompt:**<br>`raffaello style, high renaissance oil painting by Raphael and Perugino, oil on wood texture, sacred art, vivid colors, chiaroscuro, volumetric lighting, seamless restoration, color infill, Landscape Photography` <br><br>**Negative Prompt:**<br>` ` |
+| <img src="img/inpaint_example_2.png" width="512"> | **Prompt:**<br>`raffaello style, high renaissance oil painting by Raphael and Perugino, oil on wood texture, sacred art, vivid colors, chiaroscuro, volumetric lighting, seamless restoration, color infill, Landscape Photography` <br><br>**Negative Prompt:**<br>` ` |
 
 ---
 # Pipeline SD 1.5
