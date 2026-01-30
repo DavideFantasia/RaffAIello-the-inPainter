@@ -1,4 +1,4 @@
-[🏠 Home](../README.md) | [🛠️ Pipeline](./pipeline-details.md) | [🗂️ Dataset](./dataset-details.md) | [🖼️ Galleria](./gallery.md)
+[🏠 Home](../README.md) | [🛠️ Pipeline SDXL](./pipelineXL-details.md)| [🛠️ Pipeline SD 1.5](./pipelineSD15-details.md) |  [🗂️ Dataset](./dataset-details.md) | [🖼️ Galleria](./gallery.md)
 # 🔧 Pipeline
  Il progetto si sviluppa in fasi separate, tutti i vari parametri del progetto sono visionabili e modificabili sul bisogno in [`config.py`](../config.py)
  ## 1. 🗂️ Creazione del Dataset
