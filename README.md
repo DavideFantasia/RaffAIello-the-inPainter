@@ -1,4 +1,4 @@
-[🏠 Home](./README.md) | [🛠️ Pipeline](./docs/pipeline-details.md) | [🗂️ Dataset](./docs/dataset-details.md) | [🖼️ Galleria](./docs/gallery.md)
+[🏠 Home](./README.md) | [🛠️ Pipeline SDXL](./docs/pipelineXL-details.md)| [🛠️ Pipeline SD 1.5](./docs/pipelineSD15-details.md) | [🗂️ Dataset](./docs/dataset-details.md) | [🖼️ Galleria](./docs/gallery.md)
 
 # 🖌️ RaffAIello the Inpainter
 
