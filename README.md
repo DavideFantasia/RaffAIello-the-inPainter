@@ -107,7 +107,7 @@ Se si intende ri-addestrare il LoRA sullo stile di Raffaello partendo da zero, �
 
 ---
 
-# Esecuzione della pipeline
+# Esecuzione della pipeline SD 1.5
 ## Creazione Dataset
 Per scaricare le immagini da Wikimedia
 ```
@@ -144,3 +144,15 @@ Il core della pipeline è il file `multi-patch_applier.py` che usa il workflow C
 python multi-patch_applier.py
 ```
 Che riempirà la cartella `stendardo/patch_dst` con i tiles a cui è stato applicato l'inpaint. Successivamente con lo script `stitcher.py` si possonon ricomporre le patch per ottenere l'immagine originale.
+
+---
+# Esecuzione della Pipeline XL
+⚠️ Sezione soggetta a frequenti Variazioni ⚠️
+## Presequisiti
+Avendo installato i modelli nei path descritti nella sezione di [Installazione](#-installazione), importate il [workflow XL](./docs/workflow/SDXL) dentro ComfyUI, al momento non sono presenti tool di autosegmentazione per un'inpainting dell'intero quadro, ma è consigliato lavorare a zone di interesse ritaglate a mano.
+
+---
+
+# Future Improvements
+
+- Si vuole procedere con lo sviluppare un tool per permettere di visualizzare, navigare e selezionare le zone di interesse di cui si vuole fare l'inpainting direttamente con un solo esecutivo
