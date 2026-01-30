@@ -11,8 +11,7 @@ vedi la [Galleria](./docs/gallery.md) per più esempi e prompt usati.
 
 * **Dataset Fetching Automatizzato**: Raccolta immagini ad alta risoluzione da Wikimedia Commons tramite query SPARQL, filtrate per medium (Olio su tela).
 * **Smart Patching & Anatomical Priority**: Creazione di dataset di training tramite segmentazione semantica, Face Analysis e Pose Detection per isolare con priorità volti, mani e piedi.
-* **Style Training**: Addestramento LoRA su base SD 1.5 (tramite Kohya_ss) specifico per catturare lo stile pittorico di Raffaello.
-* **Advanced ComfyUI Workflow**: Pipeline di inferenza ibrida che combina Inpainting tradizionale, ControlNets e IP-Adapter per risultati coerenti.
+* **Style Training**: Addestramento LoRA con architettura SD 1.5 e SDXL (Basato su `Juggernaut XL v8`) tramite `Kohya_ss`, con lo scopo di catturare lo stile pittorico di Raffaello.
 ---
 # 📦 Installazione
 Il progetto si compone di due parti: gli script Python per la gestione del dataset/processing e l'ambiente ComfyUI per la generazione.
@@ -31,6 +30,8 @@ pip install -U -r requirements.txt
 Per far funzionare la pipeline di inpainting e l'autocaptioner, è necessaria un'installazione funzionante di [ComfyUI](https://github.com/Comfy-Org/ComfyUI)
 ### Custom Nodes Richiesti
 Installa i seguenti nodi personalizzati tramite ComfyUI Manager (*install missing custom nodes*) o clonandoli nella cartella `ComfyUI/custom_nodes`:
+
+#### SD 1.5
 <table>
 <tr>
 <th> ComfyUI </th>
@@ -68,11 +69,41 @@ Installa i seguenti nodi personalizzati tramite ComfyUI Manager (*install missin
 </tr>
 </table>
 
+#### SDXL
+
+<table>
+<tr>
+<th> ComfyUI </th>
+<th> Modelli </th>
+</tr>
+<tr>
+<td>
+
+| Nodi Custom            |
+|------------------------|
+| ComfyUI-Manager        |
+| ComfyUI-KJNodes        |
+| ComfyUI-Logic          |
+
+</td>
+<td>
+
+| Nome Modello               | Percorso                    | Link                                                                                       |
+|----------------------------|-----------------------------|--------------------------------------------------------------------------------------------|
+| Juggernaut XL    | `ComfyUI/models/checkpoint` | [🔗](https://civitai.com/api/download/models/1759168?type=Model&format=SafeTensor&size=full&fp=fp16)|
+| RaffaelloStyleXL | `ComfyUI/models/loras`      | [🔗](https://huggingface.co/DavideFantasia/RaffaelloStyleXL) o da trainare                          |
+
+</td>
+</tr>
+</table>
+
+⚠️ La lista dei modelli è soggetta a variazioni⚠️
+
 Assicurati che ComfyUI sia in esecuzione all'indirizzo specificato in `config.py` (default: `http://127.0.0.1:8000`) prima di lanciare gli script di inpainting.
 
 ## 3. Kohya_ss (Opzionale)
 
-Se si intende ri-addestrare il LoRA sullo stile di Raffaello partendo da zero, è consigliato installare [Kohya_ss GUI](https://github.com/bmaltais/kohya_ss). Il dataset creato con gli script presenti in `dataset/` è già formattato per essere digerito direttamente dagli script di training di Kohya, a cui va seguito il captioning tramite WD14 presente fra le sue utilities.
+Se si intende ri-addestrare il LoRA sullo stile di Raffaello partendo da zero, è consigliato installare [Kohya_ss GUI](https://github.com/bmaltais/kohya_ss). Il dataset creato con gli script presenti in `dataset/` è già formattato per essere digerito direttamente dagli script di training di Kohya, su cui va seguito il captioning, si consiglia `WD14`, già presente nelle utilities di Kohya, o un qualunque LLM per il captioning (come `Florence-2`) nel caso del LoRA XL.
 
 ---
 
