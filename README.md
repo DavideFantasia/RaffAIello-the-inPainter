@@ -90,7 +90,7 @@ Installa i seguenti nodi personalizzati tramite ComfyUI Manager (*install missin
 
 | Nome Modello               | Percorso                    | Link                                                                                       |
 |----------------------------|-----------------------------|--------------------------------------------------------------------------------------------|
-| Juggernaut XL    | `ComfyUI/models/checkpoint` | [🔗](https://civitai.com/api/download/models/1759168?type=Model&format=SafeTensor&size=full&fp=fp16)|
+| Juggernaut XL    | `ComfyUI/models/checkpoint` | [🔗](https://civitai.com/api/download/models/965389?type=Model&format=SafeTensor&size=full&fp=fp16) |
 | RaffaelloStyleXL | `ComfyUI/models/loras`      | [🔗](https://huggingface.co/DavideFantasia/RaffaelloStyleXL) o da trainare                          |
 
 </td>
