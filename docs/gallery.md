@@ -1,4 +1,4 @@
-[🏠 Home](../README.md) | [🛠️ Pipeline](./pipeline-details.md) | [🗂️ Dataset](./dataset-details.md) | [🖼️ Galleria](./gallery.md)
+[🏠 Home](../README.md) | [🛠️ Pipeline SDXL](./pipelineXL-details.md)| [🛠️ Pipeline SD 1.5](./pipelineSD15-details.md) |  [🗂️ Dataset](./dataset-details.md) | [🖼️ Galleria](./gallery.md)
 ---
 # Pipeline XL
 | Risultato | Dettagli di Generazione |
